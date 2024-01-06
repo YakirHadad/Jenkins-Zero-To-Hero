@@ -1,29 +1,19 @@
 pipeline {
-    agent any
-
+    agent { docker { image 'node:8.12.0' } }
+    environment {
+        HOME = '.'
+    }
     stages {
-        stage('Checkout') {
+        stage('Clone') {
             steps {
-                checkout scm
+                git branch: 'master',
+                    credentialsId: '121231k3jkj2kjkjk',
+                    url: 'https://myserver.com/my-repo.git'
             }
         }
-
-        stage('Build and Test') {
+        stage('Build') {
             steps {
-                script {
-                    // Run npm install and npm test inside a Node.js Docker container
-                    docker.image('node:14').inside('-v $PWD:/app') {
-                        sh 'cd /app && npm install'
-                        sh 'cd /app && npm test'
-                    }
-                }
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                    // Your deployment steps
-                    // This section is a placeholder; customize it based on your deployment strategy
+                sh "npm install"
             }
         }
     }
