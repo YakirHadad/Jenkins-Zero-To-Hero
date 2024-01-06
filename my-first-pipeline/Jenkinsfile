@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     tools {
+        // Replace "Your_NodeJS_Installation_Name" with the actual Node.js installation name
         nodejs "Your_NodeJS_Installation_Name"
     }
 
@@ -42,6 +43,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Your deployment steps
+                // This section is a placeholder; customize it based on your deployment strategy
             }
         }
     }
