@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            // Use a Node.js Docker image
+            image 'node:14'
+        }
+    }
 
     stages {
         stage('Checkout') {
@@ -9,34 +14,23 @@ pipeline {
         }
 
         stage('Install Dependencies') {
-            environment {
-                // Define the path to the Node.js binary based on your Jenkins configuration
-                NODEJS_HOME = tool name: 'NodeJS-14.17.3', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
-                PATH = "${NODEJS_HOME}/bin:${PATH}"
-            }
-            steps {'stage1'
-                script {
-                    // Run npm install
-                    sh 'npm install'
-                }
+            steps {
+                // Run npm install
+                sh 'npm install'
             }
         }
 
         stage('Build') {
-            steps {'stage2'
-                script {
-                    // Your build steps, for example: npm run build
-                    sh 'npm run build'
-                }
+            steps {
+                // Your build steps, for example: npm run build
+                sh 'npm run build'
             }
         }
 
         stage('Test') {
             steps {
-                script {
-                    // Your test steps, for example: npm test
-                    sh 'npm test'
-                }
+                // Your test steps, for example: npm test
+                sh 'npm test'
             }
         }
 
