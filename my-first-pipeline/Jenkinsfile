@@ -8,29 +8,14 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Build and Test') {
             steps {
                 script {
-                    // Run npm install
-                    sh 'npm install'
-                }
-            }
-        }
-
-        stage('Build') {
-            steps {
-                script {
-                    // Your build steps, for example: npm run build
-                    sh 'npm run build'
-                }
-            }
-        }
-
-        stage('Test') {
-            steps {
-                script {
-                    // Your test steps, for example: npm test
-                    sh 'npm test'
+                    // Run npm install and npm test inside a Node.js Docker container
+                    docker.image('node:14').inside('-v $PWD:/app') {
+                        sh 'cd /app && npm install'
+                        sh 'cd /app && npm test'
+                    }
                 }
             }
         }
