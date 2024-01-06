@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            // Use a Node.js Docker image
-            image 'node:14'
-        }
-    }
+    agent any
 
     stages {
         stage('Checkout') {
@@ -42,8 +37,10 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                // Your deployment steps
-                // This section is a placeholder; customize it based on your deployment strategy
+                script {
+                    // Your deployment steps
+                    // This section is a placeholder; customize it based on your deployment strategy
+                }
             }
         }
     }
