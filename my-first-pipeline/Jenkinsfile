@@ -14,7 +14,7 @@ pipeline {
                 NODEJS_HOME = tool name: 'NodeJS-14.17.3', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
                 PATH = "${NODEJS_HOME}/bin:${PATH}"
             }
-            steps {
+            steps {'stage1'
                 script {
                     // Run npm install
                     sh 'npm install'
@@ -23,7 +23,7 @@ pipeline {
         }
 
         stage('Build') {
-            steps {
+            steps {'stage2'
                 script {
                     // Your build steps, for example: npm run build
                     sh 'npm run build'
