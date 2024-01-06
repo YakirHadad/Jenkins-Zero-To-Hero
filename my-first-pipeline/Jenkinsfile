@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         // Replace "Your_NodeJS_Installation_Name" with the actual Node.js installation name
-        nodejs "Your_NodeJS_Installation_Name"
+        nodejs "NodeJS-14.17.3"
     }
 
     stages {
